@@ -1,3 +1,6 @@
 {
-  "rewrites": [{"source": "/(.*)", "destination": "/index.html"}]
+  "rewrites": [{"source": "/(.*)", "destination": "/index.html"}],
+  "buildCommand": "vite build",
+  "installCommand": "yarn install",
+  "outputDirectory": "dist"
 }

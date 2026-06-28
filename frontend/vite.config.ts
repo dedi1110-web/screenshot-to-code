@@ -11,7 +11,7 @@ export default ({ mode }) => {
     base: "",
     plugins: [
       react(),
-      checker({ 
+      !process.env.VITE_IS_DEPLOYED && checker({ 
         typescript: true
       }),
       createHtmlPlugin({

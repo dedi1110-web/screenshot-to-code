@@ -7,7 +7,8 @@ WORKDIR /app
 
 COPY backend/poetry.lock backend/pyproject.toml /app/
 RUN poetry config virtualenvs.create false && \
-    poetry install --no-interaction --no-ansi
+    poetry install --no-interaction --no-ansi && \
+    playwright install --with-deps chromium
 
 COPY backend/ /app/
 

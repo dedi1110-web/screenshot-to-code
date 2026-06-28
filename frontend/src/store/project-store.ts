@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import {
   AgentEvent,
   Commit,
@@ -82,7 +83,7 @@ interface ProjectStore {
   resetExecutionConsoles: () => void;
 }
 
-export const useProjectStore = create<ProjectStore>((set) => ({
+export const useProjectStore = create<ProjectStore>()(persist((set) => ({
   // Inputs and their setters
   inputMode: "image",
   setInputMode: (mode) => set({ inputMode: mode }),
@@ -455,4 +456,12 @@ export const useProjectStore = create<ProjectStore>((set) => ({
       },
     })),
   resetExecutionConsoles: () => set({ executionConsoles: {} }),
+}),
+{
+  name: "screenshot-to-code-state",
+  partialize: (state) => ({
+    commits: state.commits,
+    head: state.head,
+    latestCommitHash: state.latestCommitHash,
+  }),
 }));
